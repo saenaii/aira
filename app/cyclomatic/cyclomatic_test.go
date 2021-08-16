@@ -57,7 +57,7 @@ func TestParse(t *testing.T) {
 			command.GetCurrentTime = func() time.Time {
 				return currentTime
 			}
-			assert.Equal(t, c.expect, Parse(c.input))
+			assert.Equal(t, c.expect, parse(c.input))
 		})
 	}
 }

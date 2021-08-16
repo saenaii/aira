@@ -6,9 +6,9 @@ services:
     container_name: aira-go
     restart: always
     environment:
-      TIME_SPAN: 3600 # second
+      TIME_SPAN: 10 # second
       TZ: Asia/Shanghai
       OUTPUT: stdout
-      CYCLO_BAR: "1,5,20"
+      CYCLO_BAR: "10,15,20"
     volumes:
       - codePath:/app # {your code path}:/app

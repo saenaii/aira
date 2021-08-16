@@ -3,36 +3,35 @@ package cyclomatic
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 	"strings"
 	"time"
 
 	"aira-go/app/command"
+	"aira-go/config"
 )
 
 type Cyclo struct {
-	Dir      string `json:"dir"`
-	FuncName string `json:"funcNam"`
-	Path     string `json:"path"`
-	Count    string `json:"count"`
+	Dir      string    `json:"dir"`
+	FuncName string    `json:"funcNam"`
+	Path     string    `json:"path"`
+	Count    string    `json:"count"`
 	Time     time.Time `json:"time"`
 }
 
 var handler = map[string]func(map[string][]Cyclo){
-	command.DefaultOutput: handleStdOut,
+	config.DefaultOutput: handleStdOut,
 }
 
-func Analyze() {
-	bars := getCycloBar()
+func Analyze(conf config.Config) {
 	result := make(map[string][]Cyclo)
-	for _, bar := range bars {
+	for _, bar := range conf.CycloBar {
 		stdout := command.Exec("gocyclo", "-over", bar, ".")
-		result[bar] = Parse(stdout)
+		result[bar] = parse(stdout)
 	}
-	handler[command.OutputType()](result)
+	handler[conf.Output](result)
 }
 
-func Parse(input string) []Cyclo {
+func parse(input string) []Cyclo {
 	arr := strings.Split(input, "\n")
 
 	list := make([]Cyclo, 0, len(arr))
@@ -51,11 +50,6 @@ func Parse(input string) []Cyclo {
 		})
 	}
 	return list
-}
-
-func getCycloBar() []string {
-	envBar := os.Getenv("CYCLO_BAR")
-	return strings.Split(envBar, ",")
 }
 
 var handleStdOut = func(input map[string][]Cyclo) {
