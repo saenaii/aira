@@ -11,15 +11,21 @@ type Config struct {
 	TimeSpan int
 	Output   string
 	CycloBar []string
+	HTTPHost string
 }
 
 const (
 	defaultTimeSpan = 3600
-	DefaultOutput   = "stdout"
+)
+
+const (
+	OutputStdout = "stdout"
+	OutputHTTP   = "http"
 )
 
 var output = map[string]struct{}{
-	DefaultOutput: {},
+	OutputStdout: {},
+	OutputHTTP:   {},
 }
 
 func LoadConfig() Config {
@@ -27,6 +33,7 @@ func LoadConfig() Config {
 		TimeSpan: getTimeSpan(),
 		Output:   getOutput(),
 		CycloBar: getCycloBar(),
+		HTTPHost: os.Getenv("HTTP_HOST"),
 	}
 }
 
@@ -44,7 +51,7 @@ func getOutput() string {
 	if _, ok := output[value]; ok {
 		return value
 	}
-	return DefaultOutput
+	return OutputStdout
 }
 
 func getCycloBar() []string {

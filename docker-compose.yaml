@@ -1,14 +1,15 @@
 version: '3'
 
 services:
-  aira-go:
+  aira:
     build: .
-    container_name: aira-go
+    container_name: aira
     restart: always
     environment:
-      TIME_SPAN: 10 # second
+      TIME_SPAN: 3600 # second
       TZ: Asia/Shanghai
       OUTPUT: stdout
       CYCLO_BAR: "10,15,20"
+      HTTP_HOST: "127.0.0.1:6699"
     volumes:
       - codePath:/app # {your code path}:/app

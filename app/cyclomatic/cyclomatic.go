@@ -1,13 +1,12 @@
 package cyclomatic
 
 import (
-	"encoding/json"
-	"fmt"
+	"log"
 	"strings"
 	"time"
 
-	"aira-go/app/command"
-	"aira-go/config"
+	"aira/app/command"
+	"aira/config"
 )
 
 type Cyclo struct {
@@ -18,17 +17,17 @@ type Cyclo struct {
 	Time     time.Time `json:"time"`
 }
 
-var handler = map[string]func(map[string][]Cyclo){
-	config.DefaultOutput: handleStdOut,
-}
-
 func Analyze(conf config.Config) {
 	result := make(map[string][]Cyclo)
 	for _, bar := range conf.CycloBar {
 		stdout := command.Exec("gocyclo", "-over", bar, ".")
 		result[bar] = parse(stdout)
 	}
-	handler[conf.Output](result)
+
+	err := handler[conf.Output](result)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func parse(input string) []Cyclo {
@@ -50,13 +49,4 @@ func parse(input string) []Cyclo {
 		})
 	}
 	return list
-}
-
-var handleStdOut = func(input map[string][]Cyclo) {
-	b, err := json.Marshal(input)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println(string(b))
 }

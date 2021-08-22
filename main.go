@@ -1,6 +1,6 @@
 package main
 
-import "aira-go/app"
+import "aira/app"
 
 func main() {
 	app.Run()

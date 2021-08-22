@@ -4,8 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"aira-go/app/command"
 	"github.com/stretchr/testify/assert"
+
+	"aira/app/command"
 )
 
 func TestParse(t *testing.T) {

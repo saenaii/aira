@@ -1,4 +1,4 @@
-module aira-go
+module aira
 
 go 1.16
 

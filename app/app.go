@@ -3,8 +3,8 @@ package app
 import (
 	"time"
 
-	"aira-go/app/cyclomatic"
-	"aira-go/config"
+	"aira/app/cyclomatic"
+	"aira/config"
 )
 
 func Run() {
