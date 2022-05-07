@@ -18,7 +18,7 @@ type Cyclo struct {
 }
 
 func Analyze(conf config.Config) {
-	result := make(map[string][]Cyclo)
+	result := make(map[string][]Cyclo, len(conf.CycloBar))
 	for _, bar := range conf.CycloBar {
 		stdout := command.Exec("gocyclo", "-over", bar, ".")
 		result[bar] = parse(stdout)

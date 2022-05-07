@@ -10,6 +10,7 @@ import (
 type Config struct {
 	TimeSpan int
 	Output   string
+	Codes    []string
 	CycloBar []string
 	HTTPHost string
 }
@@ -31,6 +32,7 @@ var output = map[string]struct{}{
 func LoadConfig() Config {
 	return Config{
 		TimeSpan: getTimeSpan(),
+		Codes:    getCodes(),
 		Output:   getOutput(),
 		CycloBar: getCycloBar(),
 		HTTPHost: os.Getenv("HTTP_HOST"),
@@ -57,4 +59,9 @@ func getOutput() string {
 func getCycloBar() []string {
 	envBar := os.Getenv("CYCLO_BAR")
 	return strings.Split(envBar, ",")
+}
+
+func getCodes() []string {
+	value := os.Getenv("CODES")
+	return strings.Split(value, ",")
 }

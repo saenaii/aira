@@ -6,9 +6,10 @@ services:
     container_name: aira
     restart: always
     environment:
-      TIME_SPAN: 3600 # second
+      TIME_SPAN: 10 # second
       TZ: Asia/Shanghai
       OUTPUT: stdout
+      CODES: "Go"
       CYCLO_BAR: "10,15,20"
       HTTP_HOST: "127.0.0.1:6699"
     volumes:

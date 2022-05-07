@@ -1,10 +1,10 @@
-FROM golang:1.16-alpine AS base
+FROM golang:1.18-alpine AS base
 RUN apk update && apk upgrade && \
     apk --no-cache add tzdata && \
-    apk add git curl gcc && \
+    apk add git curl gcc cloc the_silver_searcher && \
     rm -rf /var/cache/apk/* && \
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.41.1 && \
-    go get -u github.com/fzipp/gocyclo/cmd/gocyclo
+    wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.45.2 && \
+    go install github.com/fzipp/gocyclo/cmd/gocyclo@latest
 
 FROM base
 WORKDIR /app/
