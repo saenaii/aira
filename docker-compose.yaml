@@ -9,6 +9,7 @@ services:
       TIME_SPAN: 10 # second
       TZ: Asia/Shanghai
       OUTPUT: stdout
+      LINT_CONFIG: "/etc/.golangci.yaml"
       CODES: "Go"
       CYCLO_BAR: "10,15,20"
       HTTP_HOST: "127.0.0.1:6699"

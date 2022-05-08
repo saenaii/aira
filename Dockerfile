@@ -9,6 +9,7 @@ RUN apk update && apk upgrade && \
 FROM base
 WORKDIR /app/
 COPY . .
+COPY .golangci.yaml /etc/.golangci.yaml
 RUN go env -w GO111MODULE=on && \
     go env -w GOPROXY=https://goproxy.cn,https://gocenter.io,https://goproxy.io,direct && \
     go mod download && \

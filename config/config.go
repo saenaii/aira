@@ -8,11 +8,12 @@ import (
 )
 
 type Config struct {
-	TimeSpan int
-	Output   string
-	Codes    []string
-	CycloBar []string
-	HTTPHost string
+	TimeSpan   int
+	Output     string
+	LintConfig string
+	Codes      []string
+	CycloBar   []string
+	HTTPHost   string
 }
 
 const (
@@ -31,11 +32,12 @@ var output = map[string]struct{}{
 
 func LoadConfig() Config {
 	return Config{
-		TimeSpan: getTimeSpan(),
-		Codes:    getCodes(),
-		Output:   getOutput(),
-		CycloBar: getCycloBar(),
-		HTTPHost: os.Getenv("HTTP_HOST"),
+		TimeSpan:   getTimeSpan(),
+		LintConfig: os.Getenv("LINT_CONFIG"),
+		Codes:      getCodes(),
+		Output:     getOutput(),
+		CycloBar:   getCycloBar(),
+		HTTPHost:   os.Getenv("HTTP_HOST"),
 	}
 }
 
