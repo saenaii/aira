@@ -13,5 +13,6 @@ services:
       CODES: "Go"
       CYCLO_BAR: "10,15,20"
       HTTP_HOST: "127.0.0.1:6699"
+      GO111MODULE: "off"
     volumes:
       - codePath:/app # {your code path}:/app

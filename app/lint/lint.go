@@ -24,6 +24,9 @@ func parse(data string) {
 	for _, issue := range issues {
 		linter := issue.Get("FromLinter").String()
 		text := issue.Get("Text").String()
-		fmt.Println(linter, text)
+		filename := issue.Get("Pos").Get("Filename").String()
+		line := issue.Get("Pos").Get("Line").String()
+
+		fmt.Println(linter, text, filename, line)
 	}
 }

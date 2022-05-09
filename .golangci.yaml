@@ -92,6 +92,10 @@ linters:
     - nlreturn
     - gochecknoinits
     - tagliatelle
+    - scopelint
+    - gomoddirectives
+    - gomodguard
+    - lll
 
   # Run only fast linters from enabled linters set (first run won't be fast)
   # Default: false
